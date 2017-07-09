@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="heading"></h1>
+<input id="input_text">
+<button id="generatetext">start</button>
+<p id="para"></p>
+<script src="jquery.js"></script>
+<script>
+    $(function () {
+        $.post('/getnews', function (data) {
+            $('#heading').text(data.articles[0].title.toString());
+        })
+    })
+    $('#generatetext').click(function () {
+        var text = $('#input_text').val();
+        $.post('/start_generation', {text: text}, function (data) {
+            console.log(data);
+//            for(var i = 0; i < 10; i++){
+//                var text = data[i].text.toString();
+//                console.log(typeof text)
+//                $('#para')[0].innerHTML = $('#para')[0].innerHTML + text + '<br>';
+//            }
+        })
+    })
+</script>
+</body>
+</html>
